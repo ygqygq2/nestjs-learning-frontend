@@ -1,5 +1,6 @@
-import { App } from "vue";
-import { RouteRecordRaw, createRouter, createWebHistory } from "vue-router";
+import type { App } from "vue";
+import type { RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   {

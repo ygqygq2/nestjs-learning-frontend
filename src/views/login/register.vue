@@ -2,7 +2,8 @@
 </script>
 
 <template>
-123
+  123
 </template>
+
 <style lang="scss" scoped>
 </style>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-
+import "@/assets/styles/root.scss";
 </script>
 
 <template>
-  <router-view></router-view>
+  <router-view />
 </template>
 
 <style scoped>
