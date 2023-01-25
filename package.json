@@ -18,8 +18,10 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.6",
+    "axios": "^1.2.3",
     "bootstrap": "^5.2.3",
     "pinia": "^2.0.29",
+    "validator": "^13.7.0",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },
@@ -27,6 +29,7 @@
     "@antfu/eslint-config": "^0.34.1",
     "@types/bootstrap": "^5.2.6",
     "@types/node": "^18.11.18",
+    "@types/validator": "^13.7.11",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "cz-git": "^1.4.1",
@@ -36,6 +39,7 @@
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-tsdoc": "^0.2.17",
+    "eslint-plugin-unused-imports": "^2.0.0",
     "eslint-plugin-vue": "^9.9.0",
     "lint-staged": "^13.1.0",
     "postcss-html": "^1.5.0",
