@@ -137,7 +137,7 @@ onMounted(async () => {
 
 // 控制模态框
 const openModal = (type: string, item?: UserItem) => {
-  localType = type;
+  // localType = type;
   tmpItem.value = item || ({} as UserItem);
   // console.log(item);
   if (type === "delete") {

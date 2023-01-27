@@ -85,7 +85,7 @@ const deleteSubmit = () => {
 
 // 控制模态框
 const openModal = (type: string) => {
-  localType = type;
+  // localType = type;
   // console.log(item);
   if (type === "delete") {
     deleteShow.value = true;
