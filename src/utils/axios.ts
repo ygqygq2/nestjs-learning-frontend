@@ -1,5 +1,8 @@
 import axios from "axios";
 
+import { useUserStore } from "@/store/user";
+
+const store = useUserStore();
 const instance = axios.create({
   baseURL: "/api",
   timeout: 60000,
@@ -9,6 +12,9 @@ const instance = axios.create({
 instance.interceptors.request.use(
   (config) => {
     // 在发送请求之前做些什么
+    if (store.token) {
+      config.headers!.Authorization = `Bearer ${store.token}`;
+    }
     return config;
   },
   (error) => {
@@ -22,6 +28,9 @@ instance.interceptors.response.use(
   (response) => {
     // 2xx 范围内的状态码都会触发该函数。
     // 对响应数据做点什么
+    if (response.status.toString().startsWith("2")) {
+      return response.data;
+    }
     return response;
   },
   (error) => {

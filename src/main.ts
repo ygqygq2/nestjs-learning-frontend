@@ -1,11 +1,11 @@
+import "bootstrap/dist/js/bootstrap";
 import { createApp } from "vue";
+
 import App from "./App.vue";
 import { setupRouter } from "./router";
 import { setupStore } from "./store/index";
 
-import "bootstrap/dist/js/bootstrap";
-
-function boostrap() {
+function bootstrap() {
   const app = createApp(App);
   // router
   setupRouter(app);
@@ -16,4 +16,4 @@ function boostrap() {
   app.mount("#app");
 }
 
-boostrap();
+bootstrap();

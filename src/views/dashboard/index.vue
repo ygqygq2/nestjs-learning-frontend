@@ -4,7 +4,6 @@
 <template>
   <div>
     dashboard内容
-    <router-view />
   </div>
 </template>
 

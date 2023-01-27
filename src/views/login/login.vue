@@ -2,15 +2,23 @@ import axios from 'axios';
 <script setup lang="ts" name="login">
 import isEmail from "validator/lib/isEmail";
 
-import axios from "@/utils/axios";
+import { signin } from "@/api/login";
+
+import { useUserStore } from "../../store/user";
+
+interface LoginResponse {
+  access_token: string
+}
+
+const router = useRouter();
+const store = useUserStore();
 
 const loginInfo = reactive({
   username: "",
   usernameMsg: computed(() => {
     if (loginInfo.username !== "" && !isEmail(loginInfo.username)) {
       return "请输入正确的邮箱地址";
-    }
-    else {
+    } else {
       return "";
     }
   }),
@@ -18,17 +26,29 @@ const loginInfo = reactive({
   passwordMsg: computed(() => {
     if (loginInfo.password !== "" && loginInfo.password.length < 6) {
       return "密码长度不能小于6位";
-    }
-    else {
+    } else {
       return "";
     }
   }),
 });
 
-const submit = () => {
-  axios.post("/api/login", loginInfo).then((res) => {
-    console.log(res);
-  });
+const submit = async () => {
+  // console.log(loginInfo);
+  const { username, password } = loginInfo;
+  const res = (await signin(
+    username,
+    password
+  )) as unknown as LoginResponse;
+  // { access_token: xxx } -> 读取token信息并存储在localStorage中，方便进行读取和使用
+  if (res.access_token) {
+    store.$patch({
+      token: res.access_token,
+    });
+  }
+  router.push("/home");
+  // axios.post("/auth/login", loginInfo).then((res) => {
+  //   console.log(res);
+  // });
 };
 </script>
 

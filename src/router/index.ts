@@ -5,7 +5,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 const routes = [
   {
     path: "/login",
-    component: () => import("@/views/login/index.vue"),
+    component: () => import("@/views/login/login.vue"),
   },
   {
     path: "/register",
@@ -20,21 +20,33 @@ const routes = [
         path: "dashboard",
         name: "dashboard",
         component: () => import("@/views/dashboard/index.vue"),
+        meta: {
+          icon: "fas fa-home",
+        },
       },
       {
         path: "users",
         name: "users",
         component: () => import("@/views/users/index.vue"),
+        meta: {
+          icon: "fas fa-user",
+        },
       },
       {
         path: "roles",
         name: "roles",
         component: () => import("@/views/roles/index.vue"),
+        meta: {
+          icon: "fas fa-tools",
+        },
       },
       {
         path: "menus",
         name: "menus",
         component: () => import("@/views/menus/index.vue"),
+        meta: {
+          icon: "fas fa-bars",
+        },
       },
     ],
   },

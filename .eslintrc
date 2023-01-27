@@ -13,6 +13,8 @@
     // Note: you must disable the base rule as it can report incorrect errors
     "comma-dangle": "off",
     "@typescript-eslint/comma-dangle": ["off", "only-multiline"],
+    "brace-style": ["warn", "1tbs", { "allowSingleLine": true }],
+    "@typescript-eslint/brace-style": ["warn", "1tbs", { "allowSingleLine": true }],
     // 模块导入顺序规则
     "import/order": [
       1,
