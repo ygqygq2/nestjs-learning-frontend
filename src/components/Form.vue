@@ -39,7 +39,7 @@ const model = ref<any>({
     }, {} as Record<string, any>)
   ),
 });
-// const model = ref({
+// const model= ref({
 //  [prop]: item.value
 // })
 

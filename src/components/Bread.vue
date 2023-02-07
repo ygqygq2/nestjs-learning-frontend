@@ -3,7 +3,6 @@ import { useMenusStore } from "@/store/menus";
 
 const route = useRoute();
 const store = useMenusStore();
-console.log(store.menus);
 const page = computed(
   () => store.menus.find(o => o.routeName === route.name)?.name
 );

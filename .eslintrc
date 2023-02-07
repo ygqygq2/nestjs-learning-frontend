@@ -1,5 +1,5 @@
 {
-  "plugins": ["unused-imports", "@typescript-eslint/eslint-plugin", "eslint-plugin-tsdoc"],
+  "plugins": ["unused-imports", "@typescript-eslint/eslint-plugin", "eslint-plugin-tsdoc", "zhlint"],
   "extends": ["plugin:@typescript-eslint/recommended", "@antfu", ".eslintrc-auto-import.json"],
   "parser": "vue-eslint-parser",
   "parserOptions": { "parser": "@typescript-eslint/parser" },
@@ -43,6 +43,16 @@
       }
     ],
     // ES6+
-    "no-console": 0
+    "no-console": 0,
+    "zhlint/zhlint": [
+      "warn",
+      {
+        "lintComments": true,
+        "lintStringLiterals": true,
+        "zhlint": {
+          "rules": ["space-full-width-content", "space-punctuation"]
+        }
+      }
+    ]
   }
 }

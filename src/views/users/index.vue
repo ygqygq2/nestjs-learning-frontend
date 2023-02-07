@@ -106,7 +106,7 @@ const formSchema = [
 const deleteShow = ref(false);
 const editShow = ref(false);
 
-const formValue = reactive({
+let formValue = reactive({
   username: "",
   password: "",
   profile: {
@@ -117,9 +117,9 @@ const formValue = reactive({
   roles: [] as RoleItem[],
 } as UserItem);
 
-// let localType = "";
+let localType = "";
 
-// 模态框的控制handler
+// 模态框的控制 handler
 const msg = ref("新增");
 
 // 获取数据
@@ -137,9 +137,10 @@ onMounted(async () => {
 
 // 控制模态框
 const openModal = (type: string, item?: UserItem) => {
-  // localType = type;
+  localType = type;
   tmpItem.value = item || ({} as UserItem);
-  // console.log(item);
+  // form 表单数据
+  // Object.assign(formValue, item);
   if (type === "delete") {
     deleteShow.value = true;
   } else if (type === "edit") {
@@ -152,40 +153,52 @@ const openModal = (type: string, item?: UserItem) => {
 };
 
 const editSubmit = async (val: any) => {
-  console.log("🚀 ~ file: index.vue ~ line 221 ~ editSubmit ~ val", val);
-  console.log(formValue);
-  // 判断用户是新增，还是编辑
-  // if (localType === "add") {
-  //   // 发送对应的数据到接口
-  //   const res = await axios.post("/user", formValue);
-  //   console.log("🚀 ~ file: index.vue ~ line 238 ~ editSubmit ~ res", res);
-  //   // 清空form表单
-  //   Object.assign(formValue, {
-  //     username: "",
-  //     password: "",
-  //     profile: {
-  //       gender: 0,
-  //       address: "",
-  //       photo: "",
-  //     } as Profile,
-  //     roles: [] as RoleItem[],
-  //   });
-  //   // 关闭模态框
-  //   editShow.value = false;
-  // }
-  // todo作业 编辑
-  // 编辑的时候 —> 保存id信息 -> 传参把id代上
-  // 编辑之前，填充数据到form表单上 -> formValue -> mapper -> roles id
+  formValue = val;
+  // 判断用户是新增还是编辑
+  if (localType === "add") {
+    // 发送对应的数据到接口
+    const res = await axios.post("/user", formValue);
+    console.log("🚀 ~ file: index.vue~ line 238~ editSubmit~ res", res);
+    // 清空 form 表单
+    Object.assign(formValue, {
+      username: "",
+      password: "",
+      profile: {
+        gender: 0,
+        address: "",
+        photo: "",
+      } as Profile,
+      roles: [] as RoleItem[],
+    });
+    // 关闭模态框
+    editShow.value = false;
+  }
+  /*
+  * 编辑的时候—> 保存 id 信息 -> 传参把 id 代上
+  * 编辑之前填充数据到 form 表单上 -> formValue -> mapper -> roles id
+  */
+  if (localType === "edit") {
+    // 1. 获取用户编辑的 item -> id
+    const id = tmpItem.value.id;
+    // 2. 发送编辑请求
+    console.log("🚀 ~ file: index.vue:186~ editSubmit~ formValue", formValue);
+    const res = (await axios.put(`/user/${id}`, formValue)) as UserItem;
+    // 3. 请求成功之后关闭模态框
+    console.log("🚀 ~ file: index.vue:185~ editSubmit~ res", res);
+    if (res.username === tmpItem.value.username) {
+      editShow.value = false;
+    }
+  }
 };
 
 // 删除该条数据
 const deleteSubmit = async () => {
-  // 1.获取用户删除的item -> id
+  // 1. 获取用户删除的 item -> id
   const id = tmpItem.value.id;
-  // 2.发送删除请求
+  // 2. 发送删除请求
   const res = (await axios.delete(`/user/${id}`)) as UserItem;
-  // 3.请求成功之后关闭模态框
-  console.log("🚀 ~ file: index.vue ~ line 272 ~ deleteSubmit ~ res", res);
+  // 3. 请求成功之后关闭模态框
+  console.log("🚀 ~ file: index.vue~ line 272~ deleteSubmit~ res", res);
   if (res.username === tmpItem.value.username) {
     deleteShow.value = false;
   }
@@ -279,4 +292,5 @@ const deleteSubmit = async () => {
 </template>
 
 <style lang="scss" scoped>
+
 </style>
